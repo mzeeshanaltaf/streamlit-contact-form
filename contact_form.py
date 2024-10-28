@@ -95,21 +95,22 @@ with col1: # left side of the layout
                     server.sendmail(smtp_username, recipient_email, msg.as_string())
 
                     ## Send the confirmation email to the message sender # If you do not want to send a confirmation email leave this section commented
-                    current_datetime = datetime.datetime.now()
-                    formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
-                    confirmation_subject = f"Confirmation of Contact Form Submission ({formatted_datetime})"
-                    confirmation_body = f"Thank you for contacting us! Your message has been received.\n\nYour message:\n {message}"
-                    confirmation_msg = MIMEMultipart()
-                    confirmation_msg['From'] = smtp_username
-                    confirmation_msg['To'] = email  # Use the sender's email address here
-                    confirmation_msg['Subject'] = confirmation_subject
-                    confirmation_msg.attach(MIMEText(confirmation_body, 'plain'))
-                    server.sendmail(smtp_username, email, confirmation_msg.as_string())
+                    # current_datetime = datetime.datetime.now()
+                    # formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                    # confirmation_subject = f"Confirmation of Contact Form Submission ({formatted_datetime})"
+                    # confirmation_body = f"Thank you for contacting us! Your message has been received.\n\nYour message:\n {message}"
+                    # confirmation_msg = MIMEMultipart()
+                    # confirmation_msg['From'] = smtp_username
+                    # confirmation_msg['To'] = email  # Use the sender's email address here
+                    # confirmation_msg['Subject'] = confirmation_subject
+                    # confirmation_msg.attach(MIMEText(confirmation_body, 'plain'))
+                    # server.sendmail(smtp_username, email, confirmation_msg.as_string())
 
                     ## Close the SMTP server connection
                     server.quit()
-
-                    st.success("Sent successfully!") # Success message to the user.
+                    
+                    # Acknowledgment message to the user.
+                    st.success("Thank you for contacting us! Your message has been received, and we’ll respond as soon as possible.")
                     
                     # Generate a new captcha to prevent button spamming.
                     st.session_state.captcha_text = generate_captcha()
