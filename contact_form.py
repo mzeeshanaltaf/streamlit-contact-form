@@ -30,7 +30,7 @@ captcha_text, captcha_image = st.session_state.captcha_text
 # Page configuration options
 page_title = "Contact Form"
 page_icon = ":email:"
-st.set_page_config(page_title=page_title, page_icon=page_icon, layout="centered")
+st.set_page_config(page_title=page_title, page_icon=page_icon, layout="wide")
 
 # Show the title of the app
 st.header("📫 Contact Form")
