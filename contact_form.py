@@ -37,7 +37,7 @@ st.set_page_config(page_title=page_title, page_icon=page_icon, layout="wide", in
 # Show the title of the app
 st.header("📫 Contact Form")
 
-col1, col3 =  st.columns([3, 1]) # column widths for a balanced distribution of elements in the page
+col1, col2, col3, col4 =  st.columns([3, 0.25, 1, 0.25]) # column widths for a balanced distribution of elements in the page
 
 captcha_input = None # initiate CAPTCHA
 
