@@ -34,3 +34,22 @@ st.set_page_config(page_title=page_title, page_icon=page_icon, layout="centered"
 
 # Show the title of the app
 st.header("📫 Contact Form")
+
+col1, col2, col3, col4 =  st.columns([3, 0.25, 1, 0.25]) # column widths for a balanced distribution of elements in the page
+
+captcha_input = None # initiate CAPTCHA
+
+## CAPTCHA
+with col3: # right side of the layout
+    st.markdown('<p style="text-align: justify; font-size: 12px;">CAPTCHAs are active to prevent automated submissions. <br> Thank you for your understanding.</p>', unsafe_allow_html=True) # warning for user.
+    captcha_placeholder = st.empty()
+    captcha_placeholder.image(captcha_image, use_column_width=True)
+
+    if st.button("Refresh", type="secondary", use_container_width=True): # option to refresh CAPTCHA without refreshing the page
+        st.session_state.captcha_text = generate_captcha()
+        captcha_text, captcha_image = st.session_state.captcha_text
+        captcha_placeholder.image(captcha_image, use_column_width=True)
+
+    captcha_input = st.text_input("Enter the CAPTCHA") # box to insert CAPTCHA
+    
+
