@@ -1,6 +1,8 @@
 import streamlit as st
 import smtplib
 import random
+import time
+import datetime
 
 from email_validator import validate_email, EmailNotValidError
 from email.mime.text import MIMEText
@@ -30,7 +32,7 @@ captcha_text, captcha_image = st.session_state.captcha_text
 # Page configuration options
 page_title = "Contact Form"
 page_icon = ":email:"
-st.set_page_config(page_title=page_title, page_icon=page_icon, layout="wide")
+st.set_page_config(page_title=page_title, page_icon=page_icon, layout="wide", initial_sidebar_state="expanded")
 
 # Show the title of the app
 st.header("📫 Contact Form")
@@ -41,7 +43,7 @@ captcha_input = None # initiate CAPTCHA
 
 ## CAPTCHA
 with col3: # right side of the layout
-    st.info('CAPTCHAs are active to prevent automated submissions.', icon="ℹ️")
+    st.info(' CAPTCHAs are in place to block automated submissions.', icon="ℹ️")
     captcha_placeholder = st.empty()
     captcha_placeholder.image(captcha_image, use_column_width=True)
 
@@ -69,7 +71,53 @@ with col1: # left side of the layout
 
                 # Check CAPTCHA
                 if captcha_input.upper() == captcha_text:
-                    pass
+                    smtp_server = server
+                    smtp_port = port
+                    smtp_username = user_name
+                    smtp_password = password
+                    recipient_email = recipient
+
+                    ## Create an SMTP connection
+                    server = smtplib.SMTP(smtp_server, smtp_port)
+                    server.starttls()
+                    server.login(smtp_username, smtp_password)
+
+                    ## Compose the email message
+                    subject = "Contact" # subject of the email you will receive upon contact.
+                    body = f"Email: {email}\nMessage: {message}"
+                    msg = MIMEMultipart()
+                    msg['From'] = smtp_username
+                    msg['To'] = recipient_email
+                    msg['Subject'] = subject
+                    msg.attach(MIMEText(body, 'plain'))
+
+                    ## Send the email
+                    server.sendmail(smtp_username, recipient_email, msg.as_string())
+
+                    ## Send the confirmation email to the message sender # If you do not want to send a confirmation email leave this section commented
+                    current_datetime = datetime.datetime.now()
+                    formatted_datetime = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+                    confirmation_subject = f"Confirmation of Contact Form Submission ({formatted_datetime})"
+                    confirmation_body = f"Thank you for contacting us! Your message has been received.\n\nYour message:\n {message}"
+                    confirmation_msg = MIMEMultipart()
+                    confirmation_msg['From'] = smtp_username
+                    confirmation_msg['To'] = email  # Use the sender's email address here
+                    confirmation_msg['Subject'] = confirmation_subject
+                    confirmation_msg.attach(MIMEText(confirmation_body, 'plain'))
+                    server.sendmail(smtp_username, email, confirmation_msg.as_string())
+
+                    ## Close the SMTP server connection
+                    server.quit()
+
+                    st.success("Sent successfully!") # Success message to the user.
+                    
+                    # Generate a new captcha to prevent button spamming.
+                    st.session_state.captcha_text = generate_captcha()
+                    captcha_text, captcha_image = st.session_state.captcha_text
+                    # Update the displayed captcha image
+                    captcha_placeholder.image(captcha_image, use_column_width=True)
+
+                    time.sleep(3)
                 else:
                     st.error("Text does not match the CAPTCHA.") # error to the user in case CAPTCHA does not match input
 
