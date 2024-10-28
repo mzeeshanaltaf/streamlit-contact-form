@@ -83,10 +83,11 @@ with col1: # left side of the layout
                     server.login(smtp_username, smtp_password)
 
                     ## Compose the email message
+                    from_name = "Streamlit App"
                     subject = f"{page_title} App Feedback" # subject of the email you will receive upon contact.
                     body = f"Email: {email}\nMessage: {message}"
                     msg = MIMEMultipart()
-                    msg['From'] = smtp_username
+                    msg['From'] = f"{from_name} <{smtp_username}>"
                     msg['To'] = recipient_email
                     msg['Subject'] = subject
                     msg.attach(MIMEText(body, 'plain'))
