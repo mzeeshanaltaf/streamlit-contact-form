@@ -70,3 +70,9 @@ with col1: # left side of the layout
                 # Check CAPTCHA
                 if captcha_input.upper() == captcha_text:
                     pass
+                else:
+                    st.error("Text does not match the CAPTCHA.") # error to the user in case CAPTCHA does not match input
+
+            except EmailNotValidError as e:
+                st.error(f"Invalid email address. {e}") # error in case any of the email validation checks have not passed
+
