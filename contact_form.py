@@ -39,7 +39,7 @@ st.header("📫 Contact Us")
 st.write("")
 st.write("")
 
-col1, col2, col3, col4 =  st.columns([3, 0.25, 1, 0.25]) # column widths for a balanced distribution of elements in the page
+col1, col3 =  st.columns([3, 1]) # column widths for a balanced distribution of elements in the page
 
 captcha_input = None # initiate CAPTCHA
 
