@@ -35,7 +35,7 @@ st.set_page_config(page_title=page_title, page_icon=page_icon, layout="centered"
 # Show the title of the app
 st.header("📫 Contact Form")
 
-col1, col2, col3 =  st.columns([3, 0.25, 1]) # column widths for a balanced distribution of elements in the page
+col1, col2, col3, col4 =  st.columns([3, 0.25, 1, 0.25]) # column widths for a balanced distribution of elements in the page
 
 captcha_input = None # initiate CAPTCHA
 
@@ -52,4 +52,21 @@ with col3: # right side of the layout
 
     captcha_input = st.text_input("Enter the CAPTCHA") # box to insert CAPTCHA
     
+## Contact form
+with col1: # left side of the layout
+    email = st.text_input("**Your email***", value=st.session_state.get('email', ''), key='email') # input widget for contact email
+    message = st.text_area("**Your message***", value=st.session_state.get('message', ''), key='message') # input widget for message
 
+    st.markdown('<p style="font-size: 13px;">*Required fields</p>', unsafe_allow_html=True) # indication to user that both fields must be filled
+
+    if st.button("Send", type="primary"):
+        if not email or not message:
+            st.error("Please fill out all required fields.") # error for any blank field
+        else:
+            try:
+                # Robust email validation
+                valid = validate_email(email, check_deliverability=True)
+
+                # Check CAPTCHA
+                if captcha_input.upper() == captcha_text:
+                    pass
