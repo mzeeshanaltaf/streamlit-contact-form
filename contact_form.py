@@ -54,10 +54,10 @@ with col3: # right side of the layout
     
 ## Contact form
 with col1: # left side of the layout
-    email = st.text_input("**Your email***", value=st.session_state.get('email', ''), key='email') # input widget for contact email
-    message = st.text_area("**Your message***", value=st.session_state.get('message', ''), key='message') # input widget for message
+    email = st.text_input("Your email*", key='email') # input widget for contact email
+    message = st.text_area("Your message*", key='message') # input widget for message
 
-    st.markdown('<p style="font-size: 13px;">*Required fields</p>', unsafe_allow_html=True) # indication to user that both fields must be filled
+    st.write('*Required fields') # indication to user that both fields must be filled
 
     if st.button("Send", type="primary"):
         if not email or not message:
