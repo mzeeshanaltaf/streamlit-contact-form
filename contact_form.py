@@ -83,7 +83,7 @@ with col1: # left side of the layout
                     server.login(smtp_username, smtp_password)
 
                     ## Compose the email message
-                    subject = "Contact" # subject of the email you will receive upon contact.
+                    subject = f"{page_title} App Feedback" # subject of the email you will receive upon contact.
                     body = f"Email: {email}\nMessage: {message}"
                     msg = MIMEMultipart()
                     msg['From'] = smtp_username
