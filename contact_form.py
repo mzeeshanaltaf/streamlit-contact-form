@@ -41,7 +41,7 @@ captcha_input = None # initiate CAPTCHA
 
 ## CAPTCHA
 with col3: # right side of the layout
-    st.markdown('<p style="text-align: justify; font-size: 12px;">CAPTCHAs are active to prevent automated submissions. <br> Thank you for your understanding.</p>', unsafe_allow_html=True) # warning for user.
+    st.info('CAPTCHAs are active to prevent automated submissions.', icon="ℹ️")
     captcha_placeholder = st.empty()
     captcha_placeholder.image(captcha_image, use_column_width=True)
 
@@ -54,8 +54,8 @@ with col3: # right side of the layout
     
 ## Contact form
 with col1: # left side of the layout
-    email = st.text_input("Your email*", key='email') # input widget for contact email
-    message = st.text_area("Your message*", key='message') # input widget for message
+    email = st.text_input("Your email:*", key='email') # input widget for contact email
+    message = st.text_area("Your message:*", key='message') # input widget for message
 
     st.write('*Required fields') # indication to user that both fields must be filled
 
