@@ -30,12 +30,14 @@ captcha_text, captcha_image = st.session_state.captcha_text
 ## Contact Form
 
 # Page configuration options
-page_title = "Contact Form"
+page_title = "Contact Us"
 page_icon = ":email:"
 st.set_page_config(page_title=page_title, page_icon=page_icon, layout="wide", initial_sidebar_state="expanded")
 
 # Show the title of the app
-st.header("📫 Contact Form")
+st.header("📫 Contact Us")
+st.write("")
+st.write("")
 
 col1, col2, col3, col4 =  st.columns([3, 0.25, 1, 0.25]) # column widths for a balanced distribution of elements in the page
 
