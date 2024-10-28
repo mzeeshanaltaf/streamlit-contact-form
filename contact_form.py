@@ -39,13 +39,12 @@ st.header("📫 Contact Us")
 st.write("")
 st.write("")
 
-col1, col3 =  st.columns([2, 1], gap="large") # column widths for a balanced distribution of elements in the page
-# col1, col2, col3, col4 =  st.columns([3, 0.25, 1, 0.25]) 
+col1, col2 =  st.columns([2, 1], gap="large") # Make Contact form column to be twice as big as CAPTCHA column
 
 captcha_input = None # initiate CAPTCHA
 
 ## CAPTCHA
-with col3: # right side of the layout
+with col2: # right side of the layout
     st.info(' CAPTCHAs are in place to block automated submissions.', icon="ℹ️")
     captcha_placeholder = st.empty()
     captcha_placeholder.image(captcha_image, use_column_width=True)
