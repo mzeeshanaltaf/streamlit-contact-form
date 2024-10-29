@@ -63,7 +63,7 @@ with col1: # left side of the layout
 
     st.write(':red[*] Required fields') # indication to user that both fields must be filled
 
-    if st.button("Send", type="primary"):
+    if st.button("Submit", type="primary"):
         if not email or not message:
             st.error("Please fill out all required fields.") # error for any blank field
         else:
@@ -114,6 +114,7 @@ with col1: # left side of the layout
                     
                     # Acknowledgment message to the user.
                     st.success("Thank you for contacting us! Your message has been received, and we’ll respond as soon as possible.")
+                    st.toast("Form Submitted Successfully")
                     
                     # Generate a new captcha to prevent button spamming.
                     st.session_state.captcha_text = generate_captcha()
